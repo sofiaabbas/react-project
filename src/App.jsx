@@ -1,4 +1,5 @@
 import { Component } from "react";
+import FilmsList from "./components/filmsList.jsx";
 import './App.css';
 
 class App extends Component {
@@ -39,6 +40,7 @@ class App extends Component {
           return <li key ={item + idx}>{item}</li>;
         })}
       </ul>
+      <FilmsList />
       </div>
       );
     }

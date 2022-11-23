@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function FilmsList(props) {
+export default function FilmsList(props) {
     
     const [list, setList] = useState([]);
 
@@ -23,6 +23,3 @@ function FilmsList(props) {
             </ul>
         );
     }
-
-    
-export default FilmsList;

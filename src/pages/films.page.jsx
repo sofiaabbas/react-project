@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { filterFilmsByDirector } from "../helpers/film.helpers.js";
-import { getUniqueListOf } from "../helpers/film.helpers.js";
+import { filterFilmsByDirector, getUniqueListOf, getFilmStats, } from "../helpers/film.helpers.js";
+import { Link } from "react-router-dom";
 
 export default function FilmsPage(props) {
     
@@ -20,6 +20,7 @@ export default function FilmsPage(props) {
 
     const filmsByDirector = filterFilmsByDirector(list, searchDirector);
     const directors = getUniqueListOf(list, "director");
+    const { avg_score, total, latest } = getFilmStats(list);
 
         return (
             <div>
@@ -46,17 +47,39 @@ export default function FilmsPage(props) {
                         </select>
                     </div>
                 </form>
+                <div>
+                    <div>
+                        <span># Of Films: </span>
+                        <span>{total}</span>
+                    </div>
+                    <div>
+                        <span>Average Rating: </span>
+                        <span>{avg_score.toFixed(2)}</span>
+                    </div>
+                    <div>
+                        <span>Latest Film: </span>
+                        <span>{latest}</span>
+                    </div>
+                </div>
                 <ul>
-                {filmsByDirector.length > 0?
-                filmsByDirector.map((element) => {
+                {filmsByDirector.length > 0
+                ? filmsByDirector.map((film) => {
                     return (
-                    <li key={element.id}>{element.title}</li>
+                    <li key={film.id}>
+                        <Link to={`film/${film.id}`}>
+                        {film.title}
+                        </Link>
+                    </li>
                     );
                 })
                 :
-                list.map((element) => {
+                list.map((film) => {
                     return (
-                    <li key={element.id}>{element.title}</li>
+                    <li key={film.id}>
+                        <Link to={`film/${film.id}`}>
+                        {film.title}
+                        </Link>
+                    </li>
                     );
                 })
                 }
